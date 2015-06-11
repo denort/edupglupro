@@ -1,0 +1,37 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, 'Логин' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :password, 'Пароль:' %>
+    <%= f.password_field :password, size: 20 %>
+  </div>
+  <div class="field">
+    <%= f.label :password_digest, 'Подтверждение пароля'%><br>
+    <%= f.password_field :password_digest %>
+  </div>
+  <div class="field">
+    <% if session[:user_id] %>
+      <% if User.find_by_id(session[:user_id]).role == "administrator" %>
+        <%= select(:user, :role, [['преподаватель', 'teacher'], ['администратор', 'admin']]) %>  
+      <% end %>  
+    <% else %>
+      <%= f.hidden_field :role, :value => "student" %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

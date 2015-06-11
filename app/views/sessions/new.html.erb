@@ -1,0 +1,47 @@
+<center>
+	<%= form_tag do %>
+		<table>
+			<tr>
+				<td colspan="2">
+					<h3>Вход</h3>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="height: 20px">
+					<% if flash[:alert] %>
+						<p id="notice"><%= flash[:alert] %></p>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					Введите Ваш логин и пароль
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<%= label_tag :name, "Логин:" %>
+				</td>
+				<td>
+					<%= text_field_tag :name, params[:name] %><br/>
+				</td>	
+			</tr>
+			<tr>
+				<td>
+					<%= label_tag :password, "Пароль:" %>
+				</td>
+				<td>
+					<%= password_field_tag :password, params[:password] %><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= link_to '<div class="btn" style="">Назад</div>'.html_safe, controller: "welcome", action: "index" %>
+				</td>
+				<td>
+					<%= submit_tag "Вход" %>
+				</td>
+			</tr>
+		</table>
+	<% end %>	
+</center>
