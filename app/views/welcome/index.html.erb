@@ -3,20 +3,25 @@
 		<tr>
 			<td>
 				<h3>Добро пожаловать!</h3>
+				<p id="notice"><%= notice %></p>
 			</td>
 		</tr>
 		<tr>
 			<td>
-			<% if session[:user_id] %>
-				login <%= User.find_by_id(session[:user_id]).name %>
-				<%= button_to 'Выйти', logout_path, method: :delete %>      
-				<% if User.find_by_id(session[:user_id]).role == "administrator"%>
-					<%= link_to '<div class="btn" style="margin-right:px;">Регистрация нового пользователя</div>'.html_safe, new_user_path %>
+				<% if session[:user_id] %>
+					login <%= User.find_by_id(session[:user_id]).name %>
+					<%= link_to '<div class="btn" style="margin-right:px;">Просмотр курсов</div>'.html_safe, courses_path %>
+					<%= button_to 'Выйти', logout_path, method: :delete %>      
+					<% if User.find_by_id(session[:user_id]).role == "administrator"%>
+						<%= link_to '<div class="btn" style="margin-right:px;">Регистрация нового пользователя</div>'.html_safe, new_user_path %>
+						<%= link_to '<div class="btn" style="margin-right:px;">Просмотр списка пользователей</div>'.html_safe, users_path %>
+					<% elsif User.find_by_id(session[:user_id]).role == "teacher"%>
+						<%= link_to '<div class="btn">Создать курс</div>'.html_safe, controller: "courses", action: "new" %>
+					<% end %>
+				<% else %>
+					<%= link_to '<div class="btn" style="margin-right:120px;">Вход</div>'.html_safe, controller: "sessions", action: "new" %>
+					<%= link_to '<div class="btn" style="margin-right:px;">Регистрация</div>'.html_safe, new_user_path %>
 				<% end %>
-			<% else %>
-				<%= link_to '<div class="btn" style="margin-right:120px;">Вход</div>'.html_safe, controller: "sessions", action: "new" %>      
-				<%= link_to '<div class="btn" style="margin-right:px;">Регистрация</div>'.html_safe, new_user_path %>
-			<% end %>
 			</td>
 		</tr>
 	</table>

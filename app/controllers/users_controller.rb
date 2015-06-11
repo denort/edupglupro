@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authorize, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_rights, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin, only: [:index]
   # GET /users
   # GET /users.json
   def index
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -75,5 +77,17 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation, :role)
+    end
+
+    def check_if_admin
+      unless User.find_by_id(session[:user_id]).role == 'administrator'
+        redirect_to welcome_index_path, notice: "Доступ к запрошенной странице запрещен. Займитесь другим"
+      end
+    end
+
+    def check_rights
+      unless User.find_by_id(session[:user_id]).role == 'administrator' or session[:user_id] == params[:id]
+        redirect_to welcome_index_url, notice: "У Вас недостаточно прав на выполнение запрошенной команды"
+      end
     end
 end

@@ -10,12 +10,12 @@ class SessionsController < ApplicationController
  		 session[:user_id] = user.id
  		 redirect_to welcome_index_path
  	  else 
- 		 redirect_to login_url, alert: "Неверный логин и/или пароль"
+ 		 redirect_to login_url, notice: "Неверный логин и/или пароль"
     end
   end
 
   def destroy
   	session[:user_id] = nil
-  	redirect_to welcome_index_path, notice: "Вы вышли из чата"
+  	redirect_to welcome_index_path, notice: "Вы вышли"
   end
 end
