@@ -1,28 +1,32 @@
 <center>
-	<table>
-		<tr>
-			<td>
-				<h3>Добро пожаловать!</h3>
-				<p id="notice"><%= notice %></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<% if session[:user_id] %>
-					login <%= User.find_by_id(session[:user_id]).name %>
-					<%= link_to '<div class="btn" style="margin-right:px;">Просмотр курсов</div>'.html_safe, courses_path %>
-					<%= button_to 'Выйти', logout_path, method: :delete %>      
-					<% if User.find_by_id(session[:user_id]).role == "administrator"%>
-						<%= link_to '<div class="btn" style="margin-right:px;">Регистрация нового пользователя</div>'.html_safe, new_user_path %>
-						<%= link_to '<div class="btn" style="margin-right:px;">Просмотр списка пользователей</div>'.html_safe, users_path %>
-					<% elsif User.find_by_id(session[:user_id]).role == "teacher"%>
-						<%= link_to '<div class="btn">Создать курс</div>'.html_safe, controller: "courses", action: "new" %>
-					<% end %>
-				<% else %>
-					<%= link_to '<div class="btn" style="margin-right:120px;">Вход</div>'.html_safe, controller: "sessions", action: "new" %>
-					<%= link_to '<div class="btn" style="margin-right:px;">Регистрация</div>'.html_safe, new_user_path %>
-				<% end %>
-			</td>
-		</tr>
-	</table>
+	<h3>Добро пожаловать!</h3>
+	<p id="notice"><%= notice %></p>
+		<% if session[:user_id] # если залогинен %> 
+			Ваш логин: <%= User.find_by_id(session[:user_id]).name %>
+			<br/>
+			<%= link_to 'Просмотр всех курсов'.html_safe, courses_path %>
+			
+			<% if User.find_by_id(session[:user_id]).courses != nil  # если создал курсы %>
+				<br/>
+				Курсы пользователя:
+				<% User.find_by_id(session[:user_id]).courses.each do |course| %>
+					<%= link_to course.name, course_path(course) %>
+				<% end %> 
+			<% end %>
+
+			<% if User.find_by_id(session[:user_id]).role == "administrator" # если админ %>
+				<br/>
+				<%= link_to 'Регистрация нового пользователя'.html_safe, new_user_path %>
+				|
+				<%= link_to 'Просмотр списка пользователей'.html_safe, users_path %>
+			<% elsif User.find_by_id(session[:user_id]).role == "teacher" # если препод %>
+				<br/>
+				<%= link_to 'Создать курс'.html_safe, controller: "courses", action: "new" %>
+			<% end %>
+			
+			<%= button_to 'Выйти', logout_path, method: :delete %>      
+		<% else %>
+			<%= link_to 'Вход'.html_safe, controller: "sessions", action: "new" %>
+			<%= link_to 'Регистрация'.html_safe, new_user_path %>
+		<% end %>
 </center>

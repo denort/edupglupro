@@ -3,5 +3,6 @@ class User < ActiveRecord::Base
 	validates_uniqueness_of :name, message: "уже есть"
 	validates_length_of :name, :within => 4..10, :too_long => "слишком длинный", :too_short => "слишком короткий"
 	has_secure_password
-	# has_many :messages, dependent: :destroy			
+	has_many :courses 	
+	has_many :lectures, through: :courses		
 end

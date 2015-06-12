@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
+Курс: <%= @course.name %>
+<br/>
+Преподаватель: <%= @course.user.name %>
+<br/>
+<% if @course.user == session[:user_id] %>
+	<%= link_to 'Добавить лекцию/задание', new_lecture_path(course_id: params[:id]) %>	
+<% end %>
+<br/>
+<% @course.lectures.all.each do |lecture| %>
+	<% if lecture.course.name == @course.name %>
+		<%= lecture.name %> 
+		<%= link_to 'Show', lecture %>
+		<% if lecture.course.user.id == session[:user_id] %>
+			<%= link_to 'Edit', edit_lecture_path(lecture) %>
+			<%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+	<% end %> 
+<% end %>
+<br/>
+<br/>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @course.user.name %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Просмотр курсов', courses_path %>
