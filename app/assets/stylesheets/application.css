@@ -13,3 +13,100 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-color: #EEE;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+a {
+  color: #00F;
+}
+
+.button_to {
+  display: inline-block;
+  border: none;
+  margin-top: -3px;
+  border-radius: 5px;
+  float: right;
+  margin-right: 7px;
+}
+
+#header {
+  width: 100%;
+  background-color: #BBB;
+  height: 40px;
+  padding: 0px 10px;
+}
+
+.menu {
+  background-color: #059;
+  color: #FFF;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px 5px 0px 0px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  font-style: bold;
+  line-height: 18px;
+  width: 150px;
+  vertical-align: bottom; 
+  margin-top: 12px; 
+  cursor: pointer;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+  color: #00E;
+  text-decoration: none
+}
+
+a:hover {
+  color: #55E;    
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}

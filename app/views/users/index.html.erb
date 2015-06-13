@@ -1,31 +1,36 @@
-<p id="notice"><%= notice %></p>
+<center>
+  <p id="notice"><%= notice %></p>
 
-<h1>Listing Users</h1>
+  <h1>Пользователи</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <table>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.fio %></td>
-        <td><%= user.role %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        
+        <% if user.fio %>
+          <td><%= user.fio %></td>
+        <% else %>
+          <td><%= user.name %></td>
+        <% end %>
+
+        <% case user.role %>
+        <% when 'administrator' %>
+          <td>администратор</td>
+        <% when 'teacher' %>
+          <td>преподаватель</td>
+        <% else %>
+          <td>студент</td>
+        <% end %> 
+
+        <td><%= link_to 'Страница пользователя', user %></td>
+        <td><%= link_to 'Изменить', edit_user_path(user) %></td>
+        
         <% if session[:user_id] != user.id %>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
         <% end %>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-<%= button_to 'Выйти', logout_path, method: :delete %>    
-<%= link_to 'создать нового пользователя', new_user_path %>
+  </table>
+  <br>
+  <%= link_to 'Cоздать нового пользователя', new_user_path %>
+</center>

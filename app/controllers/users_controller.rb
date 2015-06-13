@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+     redirect_to user_path(@user), notice: 'Ваши данные может изменить только администратор' if @user.role == 'teacher'
   end
 
   # POST /users

@@ -1,7 +1,6 @@
-
-Курс: <%= @course.name %>
-<br/>
-Преподаватель: <%= @course.user.name %>
+<center>
+	
+Курс: <%= @course.name %> <br > Преподаватель: <%= @course.user.fio %>
 <br/>
 <% if @course.user.id == session[:user_id] %>
 	<%= link_to 'Добавить лекцию/задание', new_lecture_path(course_id: params[:id]) %>	
@@ -13,11 +12,11 @@
 		<%= link_to 'Просмотр лекции', lecture %>
 		<% if lecture.course.user.id == session[:user_id] %>
 			<%= link_to 'Изменить', edit_lecture_path(lecture) %>
-			<%= link_to 'Удалить', lecture, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Удалить', lecture, method: :delete, data: { confirm: 'Вы уверены?' } %>
 		<% end %>
 	<% end %> 
 <% end %>
 <br/>
 <br/>
 
-<%= link_to 'Просмотр курсов', courses_path %>
+</center>

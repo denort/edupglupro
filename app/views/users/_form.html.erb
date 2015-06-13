@@ -19,13 +19,14 @@
     <%= f.text_field :fio %>
   </div>
   <div class="field">
-    <%= f.label :password, 'Пароль:' %>
+    <%= f.label :password, 'Пароль:' %><br>
     <%= f.password_field :password, size: 20 %>
   </div>
   <div class="field">
-    <%= f.label :password_digest, 'Подтверждение пароля'%><br>
+    <%= f.label :password_digest, 'Подтверждение пароля:'%><br>
     <%= f.password_field :password_digest %>
   </div>
+  <br/>
   <div class="field">
     <% if session[:user_id] %>
       <% if User.find_by_id(session[:user_id]).role == "administrator" %>
@@ -35,7 +36,10 @@
       <%= f.hidden_field :role, :value => "student" %>
     <% end %>
   </div>
+  <br/>
+  <br/>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<br>

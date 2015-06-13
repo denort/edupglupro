@@ -1,6 +1,6 @@
 class ClippedFilesController < ApplicationController
   before_action :set_clipped_file, only: [:show, :edit, :update, :destroy]
-
+ 
   # GET /clipped_files
   # GET /clipped_files.json
   # def index
@@ -13,6 +13,11 @@ class ClippedFilesController < ApplicationController
     #@clipped_file = ClippedFile.find_by_id(params[:clipped_file_id])
   end
 
+  def download
+  send_file 'public/upload' + params[:fname],
+    :type => params[:ftype]
+  end
+  
   # GET /clipped_files/new
   def new
     @clipped_file = ClippedFile.new
@@ -69,6 +74,8 @@ class ClippedFilesController < ApplicationController
   end
 
   private
+   
+
     # Use callbacks to share common setup or constraints between actions.
     def set_clipped_file
       @clipped_file = ClippedFile.find(params[:id])

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'clipped_file/destroy'
 
+  get 'clipped_file/download'
+
   resources :lectures
   resources :courses
   get 'welcome/index'

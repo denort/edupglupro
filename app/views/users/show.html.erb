@@ -1,17 +1,22 @@
-<% if @user.fio != nil %>
-	<%= @user.fio %>
-<% else %>
-	<%= @user.name %>
+<center>
+<% if notice  %> 
+	<p><%= notice %></p>
 <% end %>
 
-<br/>
+<% if @user.fio != nil %>
+	<%= @user.fio %>|
+<% end %>
+	
+ Логин : <%= @user.name %>
+
+|
 <% case @user.role %>
 <% when 'administrator' %>
-	'администратор'
+	Администратор
 <% when 'teacher' %>
-	'преподаватель'
+	Преподаватель
 <% else %>
-	'студент'
+	Студент
 <% end %>		
 
 <% Course.all.each do |course|  # если создал курсы %>
@@ -30,4 +35,4 @@
 
 <br/>
 <br/>
-<%= link_to 'Изменить данные', edit_user_path(@user) %> | <%= link_to 'Начальная страница', welcome_index_path %>
+</center>
