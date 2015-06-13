@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @clipped_file.name %>
+</p>
+
+<p>
+  <strong>Lecture:</strong>
+  <%= @clipped_file.lecture.name %>
+</p>
+
+<p>
+
+<% if @clipped_file.content_type.include? 'video' %>
+	<%= video_tag 'uploads/' + @clipped_file.name, controls: true, autobuffer:true %>
+<% elsif @clipped_file.content_type.include? 'audio' %>
+	<%= audio_tag 'uploads/' + @clipped_file.name, controls: true, autobuffer:true %>
+<% elsif @clipped_file.content_type.to_s.include? 'image' %>
+	<%= image_tag('/uploads/' + @clipped_file.name, height: 225, width: 410)%>
+<% else %>
+	<%= render file: 'uploads/' + @clipped_file.name, content_type: @clipped_file.content_type %>
+<% end %>
+	<!-- render file: filename, content_type: "application/rss" -->
+</p>
+
+<%= link_to 'Назад', lecture_path(@clipped_file.lecture) %>

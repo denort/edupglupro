@@ -3,17 +3,17 @@
 <br/>
 Преподаватель: <%= @course.user.name %>
 <br/>
-<% if @course.user == session[:user_id] %>
+<% if @course.user.id == session[:user_id] %>
 	<%= link_to 'Добавить лекцию/задание', new_lecture_path(course_id: params[:id]) %>	
 <% end %>
 <br/>
 <% @course.lectures.all.each do |lecture| %>
 	<% if lecture.course.name == @course.name %>
 		<%= lecture.name %> 
-		<%= link_to 'Show', lecture %>
+		<%= link_to 'Просмотр лекции', lecture %>
 		<% if lecture.course.user.id == session[:user_id] %>
-			<%= link_to 'Edit', edit_lecture_path(lecture) %>
-			<%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Изменить', edit_lecture_path(lecture) %>
+			<%= link_to 'Удалить', lecture, method: :delete, data: { confirm: 'Are you sure?' } %>
 		<% end %>
 	<% end %> 
 <% end %>

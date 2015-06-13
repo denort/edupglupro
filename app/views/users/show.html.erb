@@ -1,9 +1,33 @@
-<%= @user.name %>
-<%= @user.role %>
+<% if @user.fio != nil %>
+	<%= @user.fio %>
+<% else %>
+	<%= @user.name %>
+<% end %>
+
 <br/>
-	<% if @user.courses.has_any? %>
+<% case @user.role %>
+<% when 'administrator' %>
+	'администратор'
+<% when 'teacher' %>
+	'преподаватель'
+<% else %>
+	'студент'
+<% end %>		
+
+<% Course.all.each do |course|  # если создал курсы %>
+	<% if course.user.id == session[:user_id] %>
+		<br/>
 		Курсы пользователя:
-		<% end %>
+	<% end %>
+	<% break %>
+<% end %>
+
+<% Course.all.each do |course| %>
+	<% if course.user.id == session[:user_id] %>
+		<%= link_to course.name, course_path(course) %> |
+	<% end %> 
+<% end %>
+
 <br/>
 <br/>
-<%= link_to 'Edit', edit_user_path(@user) %> | <%= link_to 'Back', users_path %>
+<%= link_to 'Изменить данные', edit_user_path(@user) %> | <%= link_to 'Начальная страница', welcome_index_path %>

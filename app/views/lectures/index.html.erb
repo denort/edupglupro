@@ -17,7 +17,7 @@
       <tr>
         <td><%= lecture.course.name %></td>
         <td><%= lecture.name %></td>
-        <td><%= lecture.course.user.name %></td>
+        <td><%= lecture.course.user.fio %></td>
         <td><%= link_to 'Show', lecture %></td>
         <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
         <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>

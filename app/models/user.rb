@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
 	validates_length_of :name, :within => 4..10, :too_long => "слишком длинный", :too_short => "слишком короткий"
 	has_secure_password
 	has_many :courses 	
-	has_many :lectures, through: :courses		
+	has_many :lectures, through: :courses
+	has_many :clipped_files, through: :lectures
 end

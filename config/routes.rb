@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :clipped_files
+  get 'clipped_file/new'
+
+  get 'clipped_file/create'
+
+  get 'clipped_file/destroy'
+
   resources :lectures
   resources :courses
   get 'welcome/index'

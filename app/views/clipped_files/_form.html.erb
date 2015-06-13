@@ -1,0 +1,24 @@
+<%= form_for(@clipped_file) do |f| %>
+  <% if @clipped_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@clipped_file.errors.count, "error") %> prohibited this clipped_file from being saved:</h2>
+
+      <ul>
+      <% @clipped_file.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :lecture_id, value: params[:lecture_id] %>
+  
+  <div class="field">
+    Загрузить файл <br/>
+    <%= f.file_field :file %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

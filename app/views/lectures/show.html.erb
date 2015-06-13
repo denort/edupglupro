@@ -1,18 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Course:</strong>
+  <strong>Курс:</strong>
   <%= @lecture.course.name %>
 </p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Лекция:</strong>
   <%= @lecture.name %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @lecture.course.user.name %>
+  <strong>Преподаватель:</strong>
+  <%= @lecture.course.user.fio %>
 </p>
 
-<%= link_to 'Back', course_path(@lecture.course) %>
+<% ClippedFile.all.each do |f| %>
+	<% if f.lecture_id == @lecture.id %> 
+		<%=link_to f.name, clipped_file_path(f)%><br/>
+	<% end %>
+<% end %>
+		
+<% if @lecture.course.user.id == session[:user_id] %>
+	<br/>	
+	<%= link_to 'Прикрепить файл',new_clipped_file_path(lecture_id: @lecture.id) %>
+
+<% end %>
+	<br/>
+	<br/>
+<%= link_to 'К курсу', course_path(@lecture.course) %>

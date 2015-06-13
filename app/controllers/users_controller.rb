@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
           format.html { redirect_to users_url,
-            notice: "Пользователь " + @user.name + " успешно создан." }
+            notice: "Пользователь" + @user.name + " успешно создан." }
           format.json { render action: 'show', status: :created,
             location: @user}
       else
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :role)
+      params.require(:user).permit(:name, :password, :password_confirmation, :role, :fio)
     end
 
     def check_if_admin
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
     end
 
     def check_rights
-      unless User.find_by_id(session[:user_id]).role == 'administrator' or session[:user_id] == params[:id]
+      unless User.find_by_id(session[:user_id]).role == 'administrator' || session[:user_id].to_i == params[:id].to_i
         redirect_to welcome_index_url, notice: "У Вас недостаточно прав на выполнение запрошенной команды"
       end
     end
