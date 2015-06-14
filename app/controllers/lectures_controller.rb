@@ -1,12 +1,12 @@
 class LecturesController < ApplicationController
   before_action :set_lecture, only: [:show, :edit, :update, :destroy]
-  before_action :check_rights, only: [:new, :edit, :update, :destroy]
+  before_action :check_rights, only: [ :edit, :update, :destroy]
 
   # GET /lectures
   # GET /lectures.json
-  def index
-    @lectures = Lecture.all
-  end
+  # def index
+  #   @lectures = Lecture.all
+  # end
 
   # GET /lectures/1
   # GET /lectures/1.json
@@ -57,7 +57,7 @@ class LecturesController < ApplicationController
   def destroy
     @lecture.destroy
     respond_to do |format|
-      format.html { redirect_to lectures_url, notice: 'Lecture was successfully destroyed.' }
+      format.html { redirect_to course_path(@lecture.course), notice: 'Lecture was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,8 +69,8 @@ class LecturesController < ApplicationController
     end
 
     def check_rights
-      unless session[:user_id].to_i == Course.find_by_id(params[:course_id]).user.id.to_i
-        redirect_to course_path(params[:course_id]), notice: 'Это не Ваш курс'
+      unless session[:user_id] == Lecture.find_by_id(params[:id]).course.user.id
+        redirect_to course_path(Lecture.find_by_id(params[:id])), notice: 'Это не Ваш курс'
       end
     end
 

@@ -11,12 +11,11 @@
 		<%= lecture.name %> 
 		<%= link_to 'Просмотр лекции', lecture %>
 		<% if lecture.course.user.id == session[:user_id] %>
-			<%= link_to 'Изменить', edit_lecture_path(lecture) %>
+			<%= link_to 'Изменить', edit_lecture_path(lecture, course_id: @course.id) %>
 			<%= link_to 'Удалить', lecture, method: :delete, data: { confirm: 'Вы уверены?' } %>
 		<% end %>
 	<% end %> 
 <% end %>
 <br/>
 <br/>
-
 </center>

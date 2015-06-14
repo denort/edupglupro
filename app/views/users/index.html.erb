@@ -23,7 +23,11 @@
         <% end %> 
 
         <td><%= link_to 'Страница пользователя', user %></td>
-        <td><%= link_to 'Изменить', edit_user_path(user) %></td>
+         
+        <% if (User.find_by_id(session[:user_id]).role == 'administrator') || 
+              (user.id == session[:user_id] && User.find_by_id.session[:user_id].role != 'teacher') %> 
+            <td>| <%= link_to 'Изменить', edit_user_path(user) %></td>
+        <% end %>
         
         <% if session[:user_id] != user.id %>
           <td><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>

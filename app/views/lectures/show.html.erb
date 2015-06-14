@@ -19,13 +19,24 @@
 	<p>Прикрепленные файлы:</p>
 	<% ClippedFile.all.each do |f| %>
 		<% if f.lecture_id == @lecture.id %> 
+			
+			<% types = []  %>
+			
 			<% Mime::EXTENSION_LOOKUP.each do |type| %>
-				<% if f.content_type.to_s.include?(type[0].to_s) %>
-					<%=link_to f.name, clipped_file_path(f)%><br/>
-				<% else %>
-					<%=link_to f.name, action: :download, controller: :clipped_files, fname: f.name, ftype: f.content_type%><br/>
-				<% end %>
+				<% types << type[0] %>
 			<% end %>
+			
+			<% if types.include? f.content_type.split('/')[1] %>
+				<%=link_to f.name, clipped_file_path(f)%>
+			<% else %>
+				<%=link_to f.name, '/uploads/' + f.name%>
+			<% end %>
+			
+			<% if @lecture.course.user.id == session[:user_id] %>
+				|
+				<%= link_to 'Удалить', f, method: :delete, data: { confirm: 'Вы уверены?' } %>
+			<% end %>
+			<br>
 		<% end %>
 	<% end %>
 			

@@ -10,12 +10,11 @@
       </ul>
     </div>
   <% end %>
-  <%= params %>
   <div class="field">
-    <%= f.hidden_field :course_id, value: params[:course_id] %>
+    <%= f.hidden_field :course_id, value: params[:course_id ] %>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
+    Название <br>
     <%= f.text_field :name %>
   </div>
   <div class="actions">

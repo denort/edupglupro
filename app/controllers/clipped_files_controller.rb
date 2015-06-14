@@ -1,6 +1,6 @@
 class ClippedFilesController < ApplicationController
   before_action :set_clipped_file, only: [:show, :edit, :update, :destroy]
- 
+
   # GET /clipped_files
   # GET /clipped_files.json
   # def index
@@ -11,11 +11,6 @@ class ClippedFilesController < ApplicationController
   # GET /clipped_files/1.json
   def show
     #@clipped_file = ClippedFile.find_by_id(params[:clipped_file_id])
-  end
-
-  def download
-  send_file 'public/upload' + params[:fname],
-    :type => params[:ftype]
   end
   
   # GET /clipped_files/new
@@ -67,8 +62,9 @@ class ClippedFilesController < ApplicationController
   # DELETE /clipped_files/1.json
   def destroy
     @clipped_file.destroy
+    File.delete(Rails.root + 'public/uploads/' + @clipped_file.name)
     respond_to do |format|
-      format.html { redirect_to clipped_files_url, notice: 'Clipped file was successfully destroyed.' }
+      format.html { redirect_to lecture_path(@clipped_file.lecture), notice: 'Файл удален' }
       format.json { head :no_content }
     end
   end

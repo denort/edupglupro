@@ -4,9 +4,9 @@
 # Mime::Type.register "text/richtext", :rtf
 
 # register MIME type with Rails 
-Mime::Type.register "video/mp4", :m4v
+Mime::Type.register "video/mp4", :mp4
 Mime::Type.register "video/avi", :avi
 Mime::Type.register "video/webm", :webm
 Mime::Type.register "audio/mp3", :mp3
-Mime::Type.register "text/msword", :msword
+# Mime::Type.register "text/msword", :msword
 

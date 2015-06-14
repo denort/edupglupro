@@ -4,11 +4,9 @@
 <% end %>
 
 <% if @user.fio != nil %>
-	<%= @user.fio %>|
+	<%= @user.fio %> |
 <% end %>
 	
- Логин : <%= @user.name %>
-
 |
 <% case @user.role %>
 <% when 'administrator' %>
@@ -33,6 +31,10 @@
 	<% end %> 
 <% end %>
 
+ Логин : <%= @user.name %>
+ <% if @user.role != 'teacher' %>
+ 	<%= link_to 'Изменить', edit_user_path(@user) %>
+ <% end %>
 <br/>
 <br/>
 </center>

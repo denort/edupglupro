@@ -14,7 +14,7 @@
         <% if User.find_by_id(session[:user_id]).role == 'teacher' %>
           <% if User.find_by_id(session[:user_id]) == course.user %>
             <td> <%= link_to 'Изменить', edit_course_path(course) %> |</td>
-            <td> <%= link_to 'Удалить', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td> <%= link_to 'Удалить', course, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
         <% end %>
         <% end %>
       </tr>
