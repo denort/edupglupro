@@ -5,7 +5,6 @@
       <tr>
         <th>Курс</th>
         <th>Преподаватель</th>
-        <td></td>
       </tr>
     <% @courses.each do |course| %>
       <tr>
@@ -13,8 +12,7 @@
         <td><%= course.user.fio%></td>
         <% if User.find_by_id(session[:user_id]).role == 'teacher' %>
           <% if User.find_by_id(session[:user_id]) == course.user %>
-            <td> <%= link_to 'Изменить', edit_course_path(course) %> |</td>
-            <td> <%= link_to 'Удалить', course, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+            <td> <%= link_to 'Изменить', edit_course_path(course) %> | <%= link_to 'Удалить', course, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
         <% end %>
         <% end %>
       </tr>
@@ -24,6 +22,6 @@
 
   <br>
   <% if User.find_by_id(session[:user_id]).role == 'teacher' %>
-    <%= link_to 'Создать курс', new_course_path %>
+    <%= link_to 'Создать курс', new_course_path, id: :reg %>
   <% end %>
 </center>

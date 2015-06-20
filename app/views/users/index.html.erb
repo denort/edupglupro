@@ -3,16 +3,28 @@
 
   <h1>Пользователи</h1>
 
-  <table>
+  <table style="width:600px">
+    <tr>
+      <th>
+        Логин
+      </th>
+      <th>
+        ФИО
+      </th>
+      <th>
+        Статус
+      </th>
+
+    </tr>
     <% @users.each do |user| %>
       <tr>
+        <td><%= link_to user.name, user %></td>
         
-        <% if user.fio %>
-          <td><%= user.fio %></td>
-        <% else %>
-          <td><%= user.name %></td>
-        <% end %>
-
+        <td>
+          <%= user.fio %>
+        </td>
+        
+        
         <% case user.role %>
         <% when 'administrator' %>
           <td>администратор</td>
@@ -22,11 +34,9 @@
           <td>студент</td>
         <% end %> 
 
-        <td><%= link_to 'Страница пользователя', user %></td>
-         
         <% if (User.find_by_id(session[:user_id]).role == 'administrator') || 
               (user.id == session[:user_id] && User.find_by_id.session[:user_id].role != 'teacher') %> 
-            <td>| <%= link_to 'Изменить', edit_user_path(user) %></td>
+            <td><%= link_to 'Изменить', edit_user_path(user) %></td>
         <% end %>
         
         <% if session[:user_id] != user.id %>
@@ -36,5 +46,5 @@
     <% end %>
   </table>
   <br>
-  <%= link_to 'Cоздать нового пользователя', new_user_path %>
+  <%= link_to 'Cоздать нового пользователя', new_user_path, id: :reg %>
 </center>

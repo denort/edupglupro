@@ -9,7 +9,7 @@
 	<body>
 		<% if session[:user_id] %>
 				<div id="header">	
-					<%= link_to '<div class = "menu" style = "float:rights">Главная</div>'.html_safe, welcome_index_path(session[:user_id]) %>
+					<%#= link_to '<div class = "menu" style = "float:rights">Главная</div>'.html_safe, welcome_index_path%>
 					<%= link_to '<div class = "menu" style = "float:rights">Моя страница</div>'.html_safe, user_path(session[:user_id]) %>
 					<%= link_to '<div class = "menu">Все курсы</div>'.html_safe, courses_path %>
 					<%= button_to 'Выход', logout_path, method: :delete,  class: 'menu' %>

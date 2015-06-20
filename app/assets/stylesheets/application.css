@@ -25,6 +25,48 @@ a {
   color: #00F;
 }
 
+td {
+text-align:center;border:1px dotted white;border-radius: 5px 
+}
+
+table {
+  margin-top: 50px;border:1px solid white;width:500px; padding:10px;background-color:#CCF;border-radius: 10px
+}
+
+#auth {
+  background-color: #059;
+  color: #FFF;
+  display: inline-block;
+  padding: 5px;
+  /*border-radius: 5px/* 5px 0px 0px*/;*/
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  font-style: bold;
+  line-height: 18px;
+  width: 234px ;
+  /*vertical-align: bottom; */
+  /*margin-top: 12px; */
+  cursor: pointer;
+}
+
+#reg{
+  background-color: #559;
+  color: #FFF;
+  display: inline-block;
+  padding: 5px;
+  /*border-radius: 5px 5px 0px 0px;*/
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  font-style: bold;
+  line-height: 18px;
+  width: 220px;
+  text-align: center;
+  /*vertical-align: bottom; */
+  /*margin-top: 12px; */
+  border:  2px gray solid;
+  cursor: pointer;  
+}
+
 .button_to {
   display: inline-block;
   border: none;
@@ -80,6 +122,8 @@ a:hover {
 
 #notice {
   color: green;
+  font-size: 10px;
+  font-weight: bold;
 }
 
 .field_with_errors {

@@ -1,45 +1,57 @@
 <center>
 	<%= form_tag do %>
-		<table>
+		<table style="width:500px;height:400px;padding:50px;border-radius: 15px;border: 1px solid white;background-color: #CCF">
 			<tr>
 				<td colspan="2">
-					<h3>Вход</h3>
+					<center><h3>Авторизация</h3></center>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2" style="height: 20px">
-						<p id="notice"><%= notice %></p>
-
-				</td>
-			</tr>
+			<!-- <tr> -->
+				<!-- <td colspan="2" style="height: 50px;border-style:1px solid white"> -->
+					
+						<!-- <p id="notice"><%#= notice %></p> -->
+				
+				<!-- </td> -->
+			<!-- </tr> -->
 			<tr>
 				<th colspan="2">
 					Введите Ваш логин и пароль
 				</th>
 			</tr>
 			<tr>
-				<td>
+				
+				<td style="padding-top:5px;width:150px">
+			
 					<%= label_tag :name, "Логин:" %>
+			
 				</td>
-				<td>
-					<%= text_field_tag :name, params[:name] %><br/>
+				<td style="padding-top:5px;width: 240px">
+					<%= text_field_tag :name, params[:name]%><br/>
 				</td>	
 			</tr>
 			<tr>
 				<td>
-					<%= label_tag :password, "Пароль:" %>
+					<%= label_tag :password, "Пароль:"%>
 				</td>
 				<td>
 					<%= password_field_tag :password, params[:password] %><br/>
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<%= link_to '<div class="btn" style="">Назад</div>'.html_safe, controller: "welcome", action: "index" %>
+				<td  colspan="2">
+					<center>
+						<%= submit_tag "Вход", id: :auth%>
+					</center>
 				</td>
-				<td>
-					<%= submit_tag "Вход" %>
-				</td>
+			</tr>
+			<tr >
+					<td colspan="2">
+				<center>
+						<%= link_to '<div id="reg">Регистрация</div>'.html_safe, new_user_path %>
+				</center>
+					</td>
+					
+				
 			</tr>
 		</table>
 	<% end %>	

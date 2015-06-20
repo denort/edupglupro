@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-          format.html { redirect_to users_url,
+          format.html { redirect_to @user,
             notice: "Пользователь" + @user.name + " успешно создан." }
           format.json { render action: 'show', status: :created,
             location: @user}

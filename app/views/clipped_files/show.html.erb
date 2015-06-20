@@ -1,28 +1,31 @@
 <center>
 	
 <p id="notice"><%= notice %></p>
+<table>
+	<tr>
+		<td width="50%">Лекция:</td>
+		<td><%= @clipped_file.lecture.name %></td>  
+	</tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= @clipped_file.name %>
-</p>
+	<tr>
+  		<td colspan="2"><b><%= @clipped_file.name %></b></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+			<% if @clipped_file.content_type.include? 'video' %>
+				<%= video_tag '/uploads/' + @clipped_file.name, controls: true, autobuffer:true, height: 225, width: 410 %>
+			<% elsif @clipped_file.content_type.include? 'audio' %>
+				<%= audio_tag '/uploads/' + @clipped_file.name, controls: true, autobuffer:true %>
+			<% elsif @clipped_file.content_type.to_s.include? 'image' %>
+				<%= image_tag('/uploads/' + @clipped_file.name, height: 225, width: 410)%>
+			<% else %>
+				<%= render file: '/public/uploads/' + @clipped_file.name %> <%#, content_type: @clipped_file.content_type %>
+			<% end %>
+		</td>
+	</tr>
 
-<p>
-  <strong>Lecture:</strong>
-  <%= @clipped_file.lecture.name %>
-</p>
-
-<p>
-	<% if @clipped_file.content_type.include? 'video' %>
-		<%= video_tag '/uploads/' + @clipped_file.name, controls: true, autobuffer:true, height: 225, width: 410 %>
-	<% elsif @clipped_file.content_type.include? 'audio' %>
-		<%= audio_tag '/uploads/' + @clipped_file.name, controls: true, autobuffer:true %>
-	<% elsif @clipped_file.content_type.to_s.include? 'image' %>
-		<%= image_tag('/uploads/' + @clipped_file.name, height: 225, width: 410)%>
-	<% else %>
-		<%= render file: '/public/uploads/' + @clipped_file.name %> <%#, content_type: @clipped_file.content_type %>
-	<% end %>
-</p>
-
-<%= link_to 'Назад', lecture_path(@clipped_file.lecture) %>
+</table>
+	<br>
+	<%= link_to 'Назад', lecture_path(@clipped_file.lecture), id: :reg %>
 </center>

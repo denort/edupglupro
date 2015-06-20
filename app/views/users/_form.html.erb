@@ -1,4 +1,7 @@
+<table>
 <%= form_for(@user) do |f| %>
+  
+  <!-- ошибки -->
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -9,37 +12,54 @@
       </ul>
     </div>
   <% end %>
+  <!-- ошибки -->
 
-  <div class="field">
-    <%= f.label :name, 'Логин' %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :fio, 'ФИО' %><br>
-    <%= f.text_field :fio %>
-  </div>
-  <div class="field">
-    <%= f.label :password, 'Пароль:' %><br>
-    <%= f.password_field :password, size: 20 %>
-  </div>
-  <div class="field">
-    <%= f.label :password_digest, 'Подтверждение пароля:'%><br>
-    <%= f.password_field :password_digest %>
-  </div>
-  <br/>
-  <div class="field">
-    <% if session[:user_id] %>
-      <% if User.find_by_id(session[:user_id]).role == "administrator" %>
-        <%= select(:user, :role, [['преподаватель', 'teacher'], ['администратор', 'admin']]) %>  
-      <% end %>  
-    <% else %>
-      <%= f.hidden_field :role, :value => "student" %>
-    <% end %>
-  </div>
-  <br/>
-  <br/>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <tr>
+    <td>
+      <%= f.label :name, 'Логин' %><br>
+    </td>
+    <td>
+      <%= f.text_field :name %>
+    </td>
+    <tr>
+      <td>
+        <%= f.label :fio, 'ФИО' %><br>
+      </td>
+      <td>
+        <%= f.text_field :fio %>
+      </td>
+    </tr>  
+    <tr>
+      <td>
+        <%= f.label :password, 'Пароль:' %><br>
+      </td>
+      <td>
+        <%= f.password_field :password, size: 20 %>
+      </td>
+    </tr>    
+    <tr>
+      <td>
+        <%= f.label :password_digest, 'Подтверждение пароля:'%>
+      </td>  
+      <td>
+        <%= f.password_field :password_digest %>  
+      </td>  
+    </tr>
+      <% if session[:user_id] %>
+        <% if User.find_by_id(session[:user_id]).role == "administrator" %>
+          <tr>
+            <td colspan="2">
+              <%= select(:user, :role, [['преподаватель', 'teacher'], ['администратор', 'admin']]) %>  
+            </td>
+          </tr>
+        <% end %>  
+      <% else %>
+        <%= f.hidden_field :role, :value => "student" %>
+      <% end %>
+    <tr>
+      <td colspan="2">
+        <%= f.submit %>
+      </td>
+    </tr>    
 <% end %>
-<br>
+</table>

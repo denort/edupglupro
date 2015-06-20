@@ -10,16 +10,23 @@
       </ul>
     </div>
   <% end %>
-
-  <p> Для онлайн воспроизведения загружайте</p>
-  <p> видео формата webm и mp4 , аудио mp3, изображения png и jpg, текстовые файлы</p>
-  <%= f.hidden_field :lecture_id, value: params[:lecture_id] %>
-  
-  <div class="field">
-    <%= f.file_field :file %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+    <tr>
+      <td >
+        <p> Для онлайн воспроизведения загружайте</p>
+        <p> видео формата webm и mp4 , аудио mp3, изображения png и jpg, текстовые файлы</p>
+        <%= f.hidden_field :lecture_id, value: params[:lecture_id] %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.file_field :file %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <%= f.submit %>
+      </td>
+    </tr>    
+  </table>
 <% end %>

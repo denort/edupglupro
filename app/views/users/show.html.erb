@@ -2,39 +2,95 @@
 <% if notice  %> 
 	<p><%= notice %></p>
 <% end %>
+<table>
+	<!-- логин -->
+	<tr>
+		<td width="50%">Логин:</td> 
+		<td >
+			<%= @user.name %>  
+		 	<% if @user.role != 'teacher' %>
+		 		|
+		 		<%= link_to 'Изменить', edit_user_path(@user) %>
+		 	<% end %>
+		</td>
+	</tr>
+	<!-- логин -->
 
-<% if @user.fio != nil %>
-	<%= @user.fio %> |
-<% end %>
-	
-|
-<% case @user.role %>
-<% when 'administrator' %>
-	Администратор
-<% when 'teacher' %>
-	Преподаватель
-<% else %>
-	Студент
-<% end %>		
-
-<% Course.all.each do |course|  # если создал курсы %>
-	<% if course.user.id == session[:user_id] %>
-		<br/>
-		Курсы пользователя:
+	<!-- фио -->
+	<% if @user.fio != nil %>
+		<tr>
+			<td width="50%">
+				ФИО: 
+			</td>
+			<td>
+				
+			<%= @user.fio %> 
+			</td>
+		</tr>
 	<% end %>
-	<% break %>
-<% end %>
+	<!-- фио -->
 
-<% Course.all.each do |course| %>
-	<% if course.user.id == session[:user_id] %>
-		<%= link_to course.name, course_path(course) %> |
-	<% end %> 
-<% end %>
+	<!-- роль -->
+	<tr>
+		<td colspan="2">
+			<% case @user.role %>
+			<% when 'administrator' %>
+				Администратор
+			<% when 'teacher' %>
+				Преподаватель
+			<% else %>
+				Студент
+			<% end %>		
+		</td>
+	</tr>
+	<!-- роль -->
 
- Логин : <%= @user.name %>
- <% if @user.role != 'teacher' %>
- 	<%= link_to 'Изменить', edit_user_path(@user) %>
- <% end %>
+	<!-- курсы (учитель)-->
+	<% Course.all.each do |course|  # если создал курсы %>
+		<% if course.user.id == session[:user_id] %>
+			<tr>
+				<td colspan="2">
+					Курсы пользователя:
+				</td>
+			</tr>
+		<% end %>
+		<% break %>
+	<% end %>
+
+				<% if User.find_by_id(session[:user_id]).role == 'teacher' %>
+	<tr>	
+		<td colspan="2">
+			<% Course.all.each do |course| %>
+					<% if course.user.id == session[:user_id] %>
+					|<%= link_to course.name, course_path(course)  %>|
+				<% end %> 
+			<% end %>
+		</td>
+	</tr>
+		<% end -%>
+	<% if User.find_by_id(session[:user_id]).role == "teacher" # если препод %>
+		<tr>
+			<td colspan="2">
+				<%= link_to 'Создать курс'.html_safe, controller: "courses", action: "new", id: :reg %>
+			</td>
+		</tr>
+	<% end %>
+	<!-- курсы (учитель) -->
+
+	<!-- админка -->
+	<% if User.find_by_id(session[:user_id]).role == "administrator" # если админ %>
+		<tr>
+			<td>
+				<%= link_to 'Cоздать пользователя', new_user_path, id: :reg %>
+			</td>	
+			<td>
+				<%= link_to 'Просмотр списка пользователей', users_path, id: :reg%>
+			</td>
+		</tr>
+	<% end %>
+	<!-- админка -->
+</table>
+
 <br/>
 <br/>
 </center>

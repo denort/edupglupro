@@ -2,7 +2,6 @@
   <% if @lecture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
-
       <ul>
       <% @lecture.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,14 +9,14 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+  <table>
     <%= f.hidden_field :course_id, value: params[:course_id ] %>
-  </div>
-  <div class="field">
-    Название <br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <td>Название </td>
+    <td>
+      <%= f.submit %>
+    </td>
+  </table>
+  
+  
+  
 <% end %>

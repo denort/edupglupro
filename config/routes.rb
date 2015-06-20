@@ -9,8 +9,7 @@ Rails.application.routes.draw do
 
   resources :lectures
   resources :courses
-  get 'welcome/index'
-
+  
   get 'admin' => 'admin#index'
 
   controller :sessions do 
@@ -27,7 +26,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root "sessions#new"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
